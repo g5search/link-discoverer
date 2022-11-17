@@ -56,7 +56,7 @@ class LinkDiscoverer {
         try {
           this.currentUrl = this.nextPage()
           const page = await this.requestPage()
-          await this.getLinks(page.data)
+          this.getLinks(page.data)
           this.crawledPages.push(this.currentUrl) 
         } catch (error) {
           this.urlsWithErrors.push(this.currentUrl)

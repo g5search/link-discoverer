@@ -9,7 +9,7 @@ describe('Link Discoverer Class', () => {
   test('constructor prop tests', () => {
     expect(globalLinkDiscoverer.homepageUrl).toEqual('https://www.getg5.com/')
     expect(globalLinkDiscoverer.homePageUrl).not.toEqual(null)
-    expect(globalLinkDiscoverer.pages.length).toEqual(1)
+    expect(globalLinkDiscoverer.pagesToCrawl.length).toEqual(1)
     expect(globalLinkDiscoverer.pagesToCrawl).toEqual(['https://www.getg5.com/'])
     expect(globalLinkDiscoverer.urlRejects).toEqual([
       'tel:',
@@ -62,15 +62,15 @@ describe('Link Discoverer Class', () => {
     const linkDiscoverer = new LinkDiscoverer('https://www.getg5.com/')
     await linkDiscoverer.run()
     expect(linkDiscoverer.pagesToCrawl).toEqual([])
-    expect(linkDiscoverer.pages.length).toEqual(6)
+    expect(linkDiscoverer.pagesToCrawl.length).toEqual(6)
     expect(linkDiscoverer.crawledPages.length).toEqual(6)
   })
 
   test('getValidLinks', async () => {
     const validLinkDiscoverer = new LinkDiscoverer('https://www.getg5.com/')
     //test with links
-    await validLinkDiscoverer.getLinks(html)
-    expect(validLinkDiscoverer.pages).toEqual([
+    validLinkDiscoverer.getLinks(html)
+    expect(validLinkDiscoverer.pagesToCrawl).toEqual([
       'https://www.getg5.com/',
       'https://www.getg5.com/solutions/multifamily/',
       'https://www.getg5.com/solutions/senior-living/',
@@ -78,7 +78,7 @@ describe('Link Discoverer Class', () => {
       'https://www.getg5.com/solutions/why-g5/',
       'https://www.getg5.com/solutions/how-to-get-started/'
     ])
-    expect(validLinkDiscoverer.pages.length).not.toEqual(0)
+    expect(validLinkDiscoverer.pagesToCrawl.length).not.toEqual(0)
     expect(validLinkDiscoverer.pagesToCrawl).toEqual([
       'https://www.getg5.com/',
       'https://www.getg5.com/solutions/multifamily/',
@@ -93,7 +93,7 @@ describe('Link Discoverer Class', () => {
 
     //test without links
     await invalidLinkDiscoverer.getLinks('there is no links in this text')
-    expect(invalidLinkDiscoverer.pages).toEqual(['https://www.getg5.com/'])
+    expect(invalidLinkDiscoverer.pagesToCrawl).toEqual(['https://www.getg5.com/'])
   })
 
   test('formatLink', () => {

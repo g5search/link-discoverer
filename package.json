@@ -21,7 +21,8 @@
     "docker:push:staging": "branch=$(git rev-parse --symbolic-full-name --abbrev-ref HEAD); sha=$(git rev-parse $branch); docker push $npm_package_config_imageRepo:$branch-$sha",
     "docker:push:prime": "branch=$(git rev-parse --symbolic-full-name --abbrev-ref HEAD); sha=$(git rev-parse $branch); docker push $npm_package_config_imageRepo:$branch-$sha-prime",
     "dev": "nodemon ./index.js",
-    "test": "jest"
+    "test": "jest",
+    "test:debug": "node --inspect-brk node_modules/.bin/jest"
   },
   "author": "",
   "license": "ISC",
